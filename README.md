@@ -18,7 +18,7 @@ yarn install
 bun install
 ```
 ## CORS Anywhere
-Employ "CORS Anywhere proxy" to access the API from "localhost"
+Employ "CORS Anywhere proxy" to access CommonShare API from "localhost"
 ```
 https://cors-anywhere.herokuapp.com/corsdemo
 ```
