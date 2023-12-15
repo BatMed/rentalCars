@@ -39,3 +39,17 @@ yarn dev
 # bun
 bun run dev
 ```
+# Uses Case
+
+# Rent a car
+
+Click on "rent car" button to access the car page
+
+# Search cars
+
+Searching for cars will cause the "Recomendation Car" section to filter according to your search
+
+# Favourites
+
+- Favourite cars by clicking on the heart icon
+- Click on the heart icon on the nav menu to filter favourite cars only
