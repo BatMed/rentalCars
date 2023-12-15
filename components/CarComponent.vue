@@ -42,3 +42,25 @@
 </template>
 
 <script>
+import { useMyFavoriteStore,pinia } from '~/store/fav.js';
+
+export default {
+  data(){
+    return{
+      storefav:useMyFavoriteStore(pinia)
+    }
+  },
+  props: {
+    car: {
+      type: Object,
+      required: true
+    }
+  },
+  methods:{
+  }
+};
+</script>
+
+<style>
+
+</style>
