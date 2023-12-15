@@ -1,4 +1,3 @@
-
 <template>
   <link href='https://fonts.googleapis.com/css?family=Plus Jakarta Sans' rel='stylesheet'>
   <div>
@@ -25,7 +24,7 @@
       </div>
       
       <div class="pl-14">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.44 13.1001C24.63 13.1001 23.01 13.9801 22 15.3301C20.99 13.9801 19.37 13.1001 17.56 13.1001C14.49 13.1001 12 15.6001 12 18.6901C12 19.8801 12.19 20.9801 12.52 22.0001C14.1 27.0001 18.97 29.9901 21.38 30.8101C21.72 30.9301 22.28 30.9301 22.62 30.8101C25.03 29.9901 29.9 27.0001 31.48 22.0001C31.81 20.9801 32 19.8801 32 18.6901C32 15.6001 29.51 13.1001 26.44 13.1001Z" fill="#596780"/><rect opacity="0.8" x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#C3D4E9" stroke-opacity="0.4"/></svg>
+        <svg @click="filterfav" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.44 13.1001C24.63 13.1001 23.01 13.9801 22 15.3301C20.99 13.9801 19.37 13.1001 17.56 13.1001C14.49 13.1001 12 15.6001 12 18.6901C12 19.8801 12.19 20.9801 12.52 22.0001C14.1 27.0001 18.97 29.9901 21.38 30.8101C21.72 30.9301 22.28 30.9301 22.62 30.8101C25.03 29.9901 29.9 27.0001 31.48 22.0001C31.81 20.9801 32 19.8801 32 18.6901C32 15.6001 29.51 13.1001 26.44 13.1001Z" fill="#596780"/><rect opacity="0.8" x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#C3D4E9" stroke-opacity="0.4"/></svg>
       </div>
 
     </div>
@@ -76,8 +75,12 @@
           <div class="bg-white rounded-md content-stretch p-7 flex flex-col justify-between">
             <div class="flex space-x-5">
               <p class="font-bold text-3xl">{{ this.carid.name }}</p>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.6901C2 5.6001 4.49 3.1001 7.56 3.1001C9.38 3.1001 10.99 3.9801 12 5.3401C13.01 3.9801 14.63 3.1001 16.44 3.1001C19.51 3.1001 22 5.6001 22 8.6901C22 15.6901 15.52 19.8201 12.62 20.8101Z" stroke="#90A3BF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <!-- <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.44 0.100098C12.63 0.100098 11.01 0.980098 10 2.3301C8.99 0.980098 7.37 0.100098 5.56 0.100098C2.49 0.100098 0 2.6001 0 5.6901C0 6.8801 0.19 7.9801 0.52 9.0001C2.1 14.0001 6.97 16.9901 9.38 17.8101C9.72 17.9301 10.28 17.9301 10.62 17.8101C13.03 16.9901 17.9 14.0001 19.48 9.0001C19.81 7.9801 20 6.8801 20 5.6901C20 2.6001 17.51 0.100098 14.44 0.100098Z" fill="#ED3F3F"/></svg> -->
+              <div v-if="this.storefav.checkfav(this.carid.id)">
+                <svg @click="this.storefav.delfav(this.carid.id)" width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.44 0.100098C12.63 0.100098 11.01 0.980098 10 2.3301C8.99 0.980098 7.37 0.100098 5.56 0.100098C2.49 0.100098 0 2.6001 0 5.6901C0 6.8801 0.19 7.9801 0.52 9.0001C2.1 14.0001 6.97 16.9901 9.38 17.8101C9.72 17.9301 10.28 17.9301 10.62 17.8101C13.03 16.9901 17.9 14.0001 19.48 9.0001C19.81 7.9801 20 6.8801 20 5.6901C20 2.6001 17.51 0.100098 14.44 0.100098Z" fill="#ED3F3F"/></svg>
+              </div>
+              <div v-else>
+                <svg @click="this.storefav.addfav(this.carid)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.6901C2 5.6001 4.49 3.1001 7.56 3.1001C9.38 3.1001 10.99 3.9801 12 5.3401C13.01 3.9801 14.63 3.1001 16.44 3.1001C19.51 3.1001 22 5.6001 22 8.6901C22 15.6901 15.52 19.8201 12.62 20.8101Z" stroke="#90A3BF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </div>
             <div class="flex space-x-2 ">
               <div class="flex">
@@ -116,7 +119,7 @@
           
         </div>
         <!-- recommandation -->
-        <div class="p-7">
+        <div class="p-7" id="targetDiv">
           <div class="font-semibold p-3 pb-5 text-gray-400 text-base">Recomendation Car</div>
           <div v-if="this.cars.length > 0" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div v-for="(car) in this.cars">
@@ -145,10 +148,11 @@
   <script>
   import axios from 'axios';
   import 'assets/css/main.css';
+  import { useMyFavoriteStore,pinia } from '~/store/fav.js';
   
   export default {
     data(){
-      return {cars:[], populars:[], car:[], carid:{}, all:{}}
+      return {cars:[], populars:[], car:[], carid:{}, all:{},storefav:useMyFavoriteStore(pinia)}
     },
     mounted(){
       this.getCars();
@@ -156,22 +160,29 @@
       this.getCar();
     },
     methods:{
-      getCars(){axios.get('https://cors-anywhere.herokuapp.com/https://dm-assignment-commonshare.koyeb.app/api/cars')
+      getCars(){axios.get('https://dm-assignment-commonshare.koyeb.app/api/cars')
     .then((res) => {
       this.cars = res.data.data;
       this.all = res.data.data;
     })},
-      getPopular(){axios.get('https://cors-anywhere.herokuapp.com/https://dm-assignment-commonshare.koyeb.app/api/cars/popular')
+      getPopular(){axios.get('https://dm-assignment-commonshare.koyeb.app/api/cars/popular')
     .then((res) => {
       this.populars = res.data;
     })},
-    getCar(){axios.get(`https://cors-anywhere.herokuapp.com/https://dm-assignment-commonshare.koyeb.app/api/cars/${this.$route.params.id}`)
+    getCar(){axios.get(`https://dm-assignment-commonshare.koyeb.app/api/cars/${this.$route.params.id}`)
     .then((res) => {
       this.carid = res.data;
     })},
     search(name){
     const lower = name.toLowerCase();
     this.cars = this.all.filter(obj=>obj.name.toLowerCase().includes(lower))
+    var targetDiv = document.getElementById('targetDiv');
+    targetDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+  filterfav(){
+    this.cars = this.storefav.favourites;
+    var targetDiv = document.getElementById('targetDiv');
+    targetDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
     }
   }
