@@ -1,4 +1,3 @@
-
 <template>
 <link href='https://fonts.googleapis.com/css?family=Plus Jakarta Sans' rel='stylesheet'>
 <div>
@@ -25,7 +24,7 @@
       </div>
       
       <div class="pl-14">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.44 13.1001C24.63 13.1001 23.01 13.9801 22 15.3301C20.99 13.9801 19.37 13.1001 17.56 13.1001C14.49 13.1001 12 15.6001 12 18.6901C12 19.8801 12.19 20.9801 12.52 22.0001C14.1 27.0001 18.97 29.9901 21.38 30.8101C21.72 30.9301 22.28 30.9301 22.62 30.8101C25.03 29.9901 29.9 27.0001 31.48 22.0001C31.81 20.9801 32 19.8801 32 18.6901C32 15.6001 29.51 13.1001 26.44 13.1001Z" fill="#596780"/><rect opacity="0.8" x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#C3D4E9" stroke-opacity="0.4"/></svg>
+        <svg @click="filterfav" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.44 13.1001C24.63 13.1001 23.01 13.9801 22 15.3301C20.99 13.9801 19.37 13.1001 17.56 13.1001C14.49 13.1001 12 15.6001 12 18.6901C12 19.8801 12.19 20.9801 12.52 22.0001C14.1 27.0001 18.97 29.9901 21.38 30.8101C21.72 30.9301 22.28 30.9301 22.62 30.8101C25.03 29.9901 29.9 27.0001 31.48 22.0001C31.81 20.9801 32 19.8801 32 18.6901C32 15.6001 29.51 13.1001 26.44 13.1001Z" fill="#596780"/><rect opacity="0.8" x="0.5" y="0.5" width="43" height="43" rx="21.5" stroke="#C3D4E9" stroke-opacity="0.4"/></svg>
       </div>
 
     </div>
@@ -57,7 +56,7 @@
         <div class="font-semibold p-3 pb-5 text-gray-400 text-base">Popular Cars</div>
         <div class="overflow-y-auto">   
           <div v-if="this.populars.length > 0" class="flex gap-4">
-                <div v-for="(popular) in this.populars">
+                <div v-for="(popular, index)  in this.populars">
                   <CarComponent :car='popular'/>
                 </div>
               </div>
@@ -67,11 +66,11 @@
         </div>
       </div>
       <!-- recommandation -->
-      <div class="p-7">
+      <div class="p-7" id="targetDiv">
         <div class="font-semibold p-3 pb-5 text-gray-400 text-base">Recomendation Car</div>
         <div v-if="this.cars.length > 0" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          <div v-for="(car) in this.cars">
-            <CarComponent :car='car'/>
+          <div v-for="(car, index) in this.cars">
+            <CarComponent :v-bind='index'  :car='car'/>
             
           </div>
           
@@ -96,28 +95,36 @@
 <script>
 import axios from 'axios';
 import 'assets/css/main.css';
+import { useMyFavoriteStore,pinia } from '~/store/fav.js';
 
 export default {
   data(){
-    return {cars:[], populars:[], car:[], all:{}}
+    return {cars:[], populars:[], car:[], all:{},storefav:useMyFavoriteStore(pinia)}
   },
   mounted(){
     this.getCars();
     this.getPopular();
   },
   methods:{
-    getCars(){axios.get('https://cors-anywhere.herokuapp.com/https://dm-assignment-commonshare.koyeb.app/api/cars')
+    getCars(){axios.get('https://dm-assignment-commonshare.koyeb.app/api/cars')
   .then((res) => {
     this.cars = res.data.data;
     this.all = res.data.data;
   })},
-    getPopular(){axios.get('https://cors-anywhere.herokuapp.com/https://dm-assignment-commonshare.koyeb.app/api/cars/popular')
+    getPopular(){axios.get('https://dm-assignment-commonshare.koyeb.app/api/cars/popular')
   .then((res) => {
     this.populars = res.data;
   })},
   search(name){
     const lower = name.toLowerCase();
     this.cars = this.all.filter(obj=>obj.name.toLowerCase().includes(lower))
+    var targetDiv = document.getElementById('targetDiv');
+    targetDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+  filterfav(){
+    this.cars = this.storefav.favourites;
+    var targetDiv = document.getElementById('targetDiv');
+    targetDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   }
 }
