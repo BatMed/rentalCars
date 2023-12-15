@@ -1,0 +1,12 @@
+.li-title {
+    font-size: large;
+    font-weight: bold;
+    line-height: 2.5rem;
+    color: #020617;
+}
+
+li {
+    font-size: 1rem;
+    line-height: 2rem;
+    color: #596780;
+}
