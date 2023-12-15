@@ -17,11 +17,16 @@ yarn install
 # bun
 bun install
 ```
-## CORS Anywhere
-Employ "CORS Anywhere proxy" to access CommonShare API from "localhost"
+## Handling CORS for API Access
+To access CommonShare API from "localhost", you might need to temporarily disable or bypass CORS restrictions in your browser. There are several browser extensions available that can help with this:
+
+- CORS Unblock: Allows you to easily toggle CORS restrictions on and off for specific websites.
+- CORS Everywhere: Provides granular control over CORS and allows you to modify request headers.
 ```
 https://cors-anywhere.herokuapp.com/corsdemo
 ```
+- Allow CORS: Access-Control-Allow-Origin: Enables you to override CORS restrictions for testing.
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
