@@ -1,8 +1,6 @@
-import { defineStore, createPinia } from 'pinia'
+import { createPinia, defineStore } from 'pinia'
 
-export const pinia = createPinia({
-
-})
+export const pinia = createPinia({})
 
 export const useMyFavoriteStore = defineStore(
   "favorite", {
@@ -18,7 +16,7 @@ export const useMyFavoriteStore = defineStore(
       },
       delfav(value){
         //filter & remove
-        this.favourites = this.favourites.filter(obj=>obj.id != value)
+        this.favourites = this.favourites.filter(obj=>obj.id !== value)
       },
     }
   }
